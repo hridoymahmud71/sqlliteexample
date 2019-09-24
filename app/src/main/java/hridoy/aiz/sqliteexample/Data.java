@@ -2,6 +2,7 @@ package hridoy.aiz.sqliteexample;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.SQLException;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -15,5 +16,13 @@ public class Data extends AppCompatActivity {
         setContentView(R.layout.activity_data);
 
         tvData = (TextView) findViewById(R.id.tvData);
+
+        try {
+            ContactsDB db = new ContactsDB(this);
+            db.open();
+            tvData.setText(db.getData());
+            db.close();
+        } catch (SQLException e) {
+        }
     }
 }
